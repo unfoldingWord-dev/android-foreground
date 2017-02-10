@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'foreground'
+
+    publishedGroupId = 'org.unfoldingword.tools'
+    libraryName = 'Foreground'
+    artifact = 'foreground'
+
+    libraryDescription = 'A simple library to determine if the application is in the foreground or background'
+
+    siteUrl = 'https://github.com/unfoldingWord-dev/android-foreground'
+    gitUrl = 'https://github.com/unfoldingWord-dev/android-foreground.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'neutrinog'
+    developerName = 'Joel Lonbeck'
+    developerEmail = 'joel@neutrinographics.com'
+
+    licenseName = 'The MIT License (MIT)'
+    licenseUrl = 'https://opensource.org/licenses/mit-license.php'
+    allLicenses = ["MIT"]
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "0.1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    testCompile 'junit:junit:4.12'
+}
+
+if (System.env.TRAVIS != 'true') {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+}
