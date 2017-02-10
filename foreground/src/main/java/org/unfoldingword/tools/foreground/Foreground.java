@@ -99,8 +99,9 @@ public class Foreground implements Application.ActivityLifecycleCallbacks {
      * Returns or create an instance from the context
      * @param c the context
      * @return an instance of Foreground
+     * @throws IllegalStateException when the Application object cannot be retrieved from the context
      */
-    public static Foreground get(Context c){
+    public static Foreground get(Context c) throws IllegalStateException {
         if (instance == null) {
             Context appContext = c.getApplicationContext();
             if (appContext instanceof Application) {
@@ -116,8 +117,9 @@ public class Foreground implements Application.ActivityLifecycleCallbacks {
     /**
      * Returns the instance
      * @return an instance of Foreground.
+     * @throws IllegalStateException when the singleton has not been initialized
      */
-    public static Foreground get() {
+    public static Foreground get() throws IllegalStateException{
         if (instance == null) {
             throw new IllegalStateException(
                     "Foreground is not initialised - invoke " +
